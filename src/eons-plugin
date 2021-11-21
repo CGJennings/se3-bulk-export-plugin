@@ -1,0 +1,21 @@
+#
+# Bulk export plug-in
+#
+
+id = CATALOGUEID{8f413848-961f-490d-a1ae-5aaf1cd77220:2021-8-2-0-0-0-0}
+
+catalog-name = Bulk Export
+catalog-description = Adds a new project action that exports whole folders \
+    of game components as image files. Right click on a \
+    <a href="http://se3docs.cgjennings.ca/um-proj-intro.html">project folder</a> \
+    containing game component files and choose <b>Bulk Export</b>. \
+    <p><b>New in this version:</b><ul>\
+     <li>Arbitrary export resolutions from 72 to 2400 (subject to memory limits).\
+     <li>Custom postprocessing of exported images via script code.\
+     <li>Can use on single files (previously at least two had to be selected).</ul>
+catalog-credit = Christopher G. Jennings
+catalog-version = 1.3
+catalog-tags = project,tool
+catalog-minver = 3690
+
+ca.cgjennings.seplugins.export.BulkExport
