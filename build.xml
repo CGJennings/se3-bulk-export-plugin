@@ -71,10 +71,10 @@
     nbproject/build-impl.xml file.
 
     -->
-<property environment="env"/>
-<target name="-post-jar">
-    <copy file="${dist.dir}/SE3 System Plugins.jar" tofile="${dist.dir}/BulkExport.seplugin" />
-    <copy file="${dist.dir}/BulkExport.seplugin" todir="${env.APPDATA}/StrangeEons3/plug-ins" failonerror="false" quiet="true" />
-    <delete file="${dist.dir}/SE3 System Plugins.jar" />
-</target>
+    <property environment="env"/>
+    <target name="-post-jar">
+        <copy file="${dist.dir}/SE3 System Plugins.jar" tofile="${dist.dir}/BulkExport.seplugin" />
+        <copy file="${dist.dir}/BulkExport.seplugin" todir="${env.APPDATA}/StrangeEons3/plug-ins" failonerror="false" quiet="true" />
+        <delete file="${dist.dir}/SE3 System Plugins.jar" />
+    </target>
 </project>

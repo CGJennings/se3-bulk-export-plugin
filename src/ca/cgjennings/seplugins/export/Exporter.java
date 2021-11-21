@@ -27,6 +27,7 @@ import resources.ResourceKit;
  * Export the faces of a single file.
  */
 public final class Exporter {
+
     private String format = "png";
     private boolean progressive = false;
     private double quality = 1;
@@ -38,13 +39,16 @@ public final class Exporter {
     private String postprocessingCodeFile = null;
 
     public static class Results {
+
         private Results() {
             outputFiles = new LinkedList<>();
             errors = new LinkedList<>();
         }
+
         private void add(File output) {
             outputFiles.add(output);
         }
+
         private void add(String error) {
             errors.add(error);
         }
@@ -143,8 +147,8 @@ public final class Exporter {
     }
 
     /**
-     * Sets the file path to report for the postprocessing script file
-     * in error messages. Setting a file is optional.
+     * Sets the file path to report for the postprocessing script file in error
+     * messages. Setting a file is optional.
      *
      * @param file the file path to report for the script, or null
      */
@@ -202,7 +206,7 @@ public final class Exporter {
                     final boolean resized = (entry.image.getWidth() != biWidth) || (entry.image.getHeight() != biHeight);
                     writeImage(entry, resized, results);
                 }
-            } catch(Exception ex) {
+            } catch (Exception ex) {
                 results.add(ex.getLocalizedMessage());
             } finally {
                 // allow GC of image buffers
@@ -235,7 +239,9 @@ public final class Exporter {
     }
 
     private void postprocess(PostprocessingEntry entry) {
-        if (postprocessingCode == null || postprocessingCode.isEmpty()) return;
+        if (postprocessingCode == null || postprocessingCode.isEmpty()) {
+            return;
+        }
 
         ScriptMonkey sm = new ScriptMonkey("Postprocessor");
         if (postprocessingCodeFile != null) {

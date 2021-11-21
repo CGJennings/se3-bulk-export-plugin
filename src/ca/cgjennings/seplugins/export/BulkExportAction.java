@@ -58,7 +58,8 @@ public class BulkExportAction extends TaskAction {
 
     private boolean buildList(Member[] members, List<Member> suitable) {
         int matches = 0;
-        outer: for (Member m : members) {
+        outer:
+        for (Member m : members) {
             if (m.hasChildren()) {
                 for (Member kid : m.getChildren()) {
                     if (ProjectUtilities.matchExtension(kid, "eon")) {

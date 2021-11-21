@@ -14,50 +14,50 @@ import static resources.Language.string;
  */
 public class BulkExport extends AbstractPlugin {
 
-	@Override
-	public String getPluginName() {
-		return string("bx-name");
-	}
+    @Override
+    public String getPluginName() {
+        return string("bx-name");
+    }
 
-	@Override
-	public String getPluginDescription() {
-		return string("bx-desc");
-	}
+    @Override
+    public String getPluginDescription() {
+        return string("bx-desc");
+    }
 
-	@Override
-	public float getPluginVersion() {
-		return 1.3f;
-	}
+    @Override
+    public float getPluginVersion() {
+        return 1.3f;
+    }
 
-	@Override
-	public int getPluginType() {
-		return INJECTED;
-	}
+    @Override
+    public int getPluginType() {
+        return INJECTED;
+    }
 
-	@Override
-	public boolean initializePlugin( PluginContext context ) {
-		if( !addedStrings ) {
-			// Language will also check if we already added but this is faster
-			addedStrings = true;
-			Language.getInterface().addStrings( "cgj/export/strings" );
-		}
-		return true;
-	}
-	private static boolean addedStrings;
+    @Override
+    public boolean initializePlugin(PluginContext context) {
+        if (!addedStrings) {
+            // Language will also check if we already added but this is faster
+            addedStrings = true;
+            Language.getInterface().addStrings("cgj/export/strings");
+        }
+        return true;
+    }
+    private static boolean addedStrings;
 
-	@Override
-	public void showPlugin( PluginContext context, boolean show ) {
-		registered = new BulkExportAction();
-		Actions.register( registered, Actions.PRIORITY_IMPORT_EXPORT );
-	}
+    @Override
+    public void showPlugin(PluginContext context, boolean show) {
+        registered = new BulkExportAction();
+        Actions.register(registered, Actions.PRIORITY_IMPORT_EXPORT);
+    }
 
-	@Override
-	public void unloadPlugin() {
-		if( registered != null ) {
-			Actions.unregister( registered );
-			registered = null;
-		}
-	}
+    @Override
+    public void unloadPlugin() {
+        if (registered != null) {
+            Actions.unregister(registered);
+            registered = null;
+        }
+    }
 
-	private TaskAction registered;
+    private TaskAction registered;
 }

@@ -444,12 +444,12 @@ public class BulkExportDialog extends javax.swing.JDialog implements AgnosticDia
     private void editScriptBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editScriptBtnActionPerformed
         String name = postProcScriptField.getText();
         File f = new File(name);
-        if(ProjectUtilities.matchExtension(f, "js", "ajs")) {
+        if (ProjectUtilities.matchExtension(f, "js", "ajs")) {
             if (f.getParentFile().exists()) {
                 if (!f.exists()) {
                     try {
                         ProjectUtilities.writeTextFile(f, "");
-                    } catch(IOException ex) {
+                    } catch (IOException ex) {
                         ErrorDialog.displayError(string("app-err-open", f.getName()), ex);
                         return;
                     }
@@ -500,7 +500,6 @@ public class BulkExportDialog extends javax.swing.JDialog implements AgnosticDia
         sizeLimitCheckActionPerformed(null);
         postProcCheckActionPerformed(null);
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelBtn;

@@ -11,12 +11,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 /**
- * Object that describes a sheet image to be processed by
- * an end user script file before the final version is written.
+ * Object that describes a sheet image to be processed by an end user script
+ * file before the final version is written.
  *
  * @author Christopher G. Jennings (cjennings@acm.org)
  */
 public final class PostprocessingEntry {
+
     PostprocessingEntry(Exporter ex, File sourcePath, GameComponent gc, Sheet<? extends GameComponent> sheet, int index) {
         this.sourcePath = sourcePath.getAbsolutePath();
         this.gc = gc;
@@ -43,39 +44,66 @@ public final class PostprocessingEntry {
         final File source = new File(sourcePath);
         String name = source.getName();
         final int dot = name.indexOf('.');
-        if (dot >= 0) name = name.substring(0, dot);
+        if (dot >= 0) {
+            name = name.substring(0, dot);
+        }
         name += '-' + String.valueOf(index + 1) + '.' + format;
 
         final File dest = new File(source.getParentFile(), name);
         exportPath = dest.getAbsolutePath();
     }
 
-    /** String that gives the full path to the file being exported. */
+    /**
+     * String that gives the full path to the file being exported.
+     */
     public final String sourcePath;
-    /** The GameComponent object being exported. */
+    /**
+     * The GameComponent object being exported.
+     */
     public final GameComponent gc;
-    /** The Sheet object of the specific face being exported. */
+    /**
+     * The Sheet object of the specific face being exported.
+     */
     public final Sheet<? extends GameComponent> sheet;
-    /** The index of the face (0=front, 1=back, and so on). */
+    /**
+     * The index of the face (0=front, 1=back, and so on).
+     */
     public final int index;
-    /** The export resolution in pixels per cm. */
+    /**
+     * The export resolution in pixels per cm.
+     */
     public final double ppcm;
-    /** The export resolution in pixels per inch. */
+    /**
+     * The export resolution in pixels per inch.
+     */
     public final double ppi;
-    /** True if this is a simple back face. */
+    /**
+     * True if this is a simple back face.
+     */
     public final boolean simpleBackFace;
-    /** True if the option to synthesize bleed margins was selected, else false. */
+    /**
+     * True if the option to synthesize bleed margins was selected, else false.
+     */
     public final boolean synthesizeBleedMargin;
 
-
-    /** String that gives the full path to image file to be written. */
+    /**
+     * String that gives the full path to image file to be written.
+     */
     public String exportPath;
-    /** The image data that will be written. */
+    /**
+     * The image data that will be written.
+     */
     public BufferedImage image;
-    /** The file format, as supported by {@link SimpleImageWriter}. */
+    /**
+     * The file format, as supported by {@link SimpleImageWriter}.
+     */
     public String format;
-    /** The image quality, from 0.0 to 1.0. */
+    /**
+     * The image quality, from 0.0 to 1.0.
+     */
     public double quality;
-    /** Whether or not to save with progressive scan if supported. */
+    /**
+     * Whether or not to save with progressive scan if supported.
+     */
     public boolean progressive;
 }
