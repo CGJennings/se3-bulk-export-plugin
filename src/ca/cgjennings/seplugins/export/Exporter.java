@@ -5,7 +5,6 @@ import ca.cgjennings.apps.arkham.StrangeEons;
 import ca.cgjennings.apps.arkham.component.ComponentMetadata;
 import ca.cgjennings.apps.arkham.component.GameComponent;
 import ca.cgjennings.apps.arkham.plugins.ScriptMonkey;
-import ca.cgjennings.apps.arkham.sheet.RenderTarget;
 import ca.cgjennings.apps.arkham.sheet.Sheet;
 import ca.cgjennings.apps.arkham.sheet.UndecoratedCardBack;
 import ca.cgjennings.graphics.ImageUtilities;
@@ -19,7 +18,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import static resources.Language.string;
 import resources.ResourceKit;
 
@@ -34,7 +32,7 @@ public final class Exporter {
     private double ppi = 300f;
     private int dimensionLimit = 0;
     private boolean excludeSimpleFaces = false;
-    private boolean synthesizeBleedMargin = false;
+    private boolean bleedMargin = false;
     private String postprocessingCode = "";
     private String postprocessingCodeFile = null;
 
@@ -126,12 +124,12 @@ public final class Exporter {
         this.excludeSimpleFaces = excludeSimpleFaces;
     }
 
-    public boolean isSynthesizeBleedMargin() {
-        return synthesizeBleedMargin;
+    public boolean isBleedMarginEnabled() {
+        return bleedMargin;
     }
 
-    public void setSynthesizeBleedMargin(boolean synthesizeBleedMargin) {
-        this.synthesizeBleedMargin = synthesizeBleedMargin;
+    public void setBleedMarginEnabled(boolean synthesizeBleedMargin) {
+        this.bleedMargin = synthesizeBleedMargin;
     }
 
     public String getPostprocessingCode() {
@@ -248,6 +246,7 @@ public final class Exporter {
             sm.setInternalFileName(postprocessingCodeFile);
         }
         sm.bind("bulkItem", entry);
+        sm.bind("Component", entry.gc);
         sm.eval("useLibrary('imageutils');");
         sm.eval("importClass(arkham.sheet.RenderTarget);");
         sm.eval("importClass(ca.cgjennings.graphics.ImageUtilities);");
@@ -278,6 +277,6 @@ public final class Exporter {
 
     @Override
     public String toString() {
-        return "Exporter{" + "format=" + format + ", progressive=" + progressive + ", quality=" + quality + ", ppi=" + ppi + ", dimensionLimit=" + dimensionLimit + ", excludeSimpleFaces=" + excludeSimpleFaces + ", synthesizeBleedMargin=" + synthesizeBleedMargin + ", postprocessingCode=" + postprocessingCode + '}';
+        return "Exporter{" + "format=" + format + ", progressive=" + progressive + ", quality=" + quality + ", ppi=" + ppi + ", dimensionLimit=" + dimensionLimit + ", excludeSimpleFaces=" + excludeSimpleFaces + ", synthesizeBleedMargin=" + bleedMargin + ", postprocessingCode=" + postprocessingCode + '}';
     }
 }

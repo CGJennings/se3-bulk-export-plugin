@@ -1,22 +1,39 @@
 package ca.cgjennings.seplugins.export;
 
-import ca.cgjennings.apps.arkham.Length;
+import ca.cgjennings.apps.arkham.StrangeEons;
 import ca.cgjennings.apps.arkham.component.GameComponent;
-import ca.cgjennings.apps.arkham.project.ProjectUtilities;
-import ca.cgjennings.apps.arkham.sheet.RenderTarget;
 import ca.cgjennings.apps.arkham.sheet.Sheet;
 import ca.cgjennings.apps.arkham.sheet.UndecoratedCardBack;
 import ca.cgjennings.imageio.SimpleImageWriter;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.logging.Level;
 
 /**
  * Object that describes a sheet image to be processed by an end user script
  * file before the final version is written.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Chris Jennings <https://cgjennings.ca/contact>
  */
 public final class PostprocessingEntry {
+    private static final SheetRenderer renderer;
+    static {
+        SheetRenderer theRenderer = null;
+        String className = "SE33Renderer";
+        try {
+            Sheet.class.getMethod("getUserBleedMargin");
+        } catch (NoSuchMethodException nsm) {
+            className = "SE32Renderer";
+        }
+        StrangeEons.log.log(Level.INFO, "creating bulk export renderer {0}", className);
+        className = PostprocessingEntry.class.getPackage().getName() + '.' + className;
+        try {
+            theRenderer = (SheetRenderer) Class.forName(className).newInstance();
+        } catch(ClassNotFoundException | IllegalAccessException | InstantiationException ex) {
+            StrangeEons.log.log(Level.SEVERE, "unable to create renderer", ex);
+        }
+        renderer = theRenderer;
+    }
 
     PostprocessingEntry(Exporter ex, File sourcePath, GameComponent gc, Sheet<? extends GameComponent> sheet, int index) {
         this.sourcePath = sourcePath.getAbsolutePath();
@@ -26,9 +43,10 @@ public final class PostprocessingEntry {
         ppi = ex.getResolution();
         ppcm = ppi / 2.54d;
         simpleBackFace = sheet instanceof UndecoratedCardBack;
-        synthesizeBleedMargin = ex.isSynthesizeBleedMargin();
+        
+        bleedMargin = synthesizeBleedMargin = ex.isBleedMarginEnabled();
 
-        image = sheet.paint(RenderTarget.EXPORT, ppi, synthesizeBleedMargin);
+        image = renderer.render(sheet, ppi, bleedMargin);
 
         format = ex.getFormat();
         changeExportPathExtension(null);
@@ -82,8 +100,17 @@ public final class PostprocessingEntry {
      */
     public final boolean simpleBackFace;
     /**
-     * True if the option to synthesize bleed margins was selected, else false.
+     * True if a bleed margin was requested, else false.
+     * @since 3.3
      */
+    public final boolean bleedMargin;
+    /**
+     * True if the option to synthesize bleed margins was selected, else false.
+     * 
+     * @deprecated When running in Strange Eons 3.3 or newer, this is equivalent
+     * to the {@link #bleedMargin} property.
+     */
+    @Deprecated
     public final boolean synthesizeBleedMargin;
 
     /**

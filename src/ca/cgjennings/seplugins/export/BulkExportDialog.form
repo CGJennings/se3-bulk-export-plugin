@@ -354,7 +354,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="excludeSimpleFacesCheck" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="syntheticBleedMargin" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="bleedMargin" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="postProcCheck" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -374,7 +374,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="excludeSimpleFacesCheck" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="syntheticBleedMargin" min="-2" max="-2" attributes="0"/>
+                  <Component id="bleedMargin" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="postProcCheck" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -395,10 +395,10 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="syntheticBleedMargin">
+        <Component class="javax.swing.JCheckBox" name="bleedMargin">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="resources/text/interface/eons-text.properties" key="de-l-fake-bleed" replaceFormat="string(&quot;{key}&quot;)"/>
+              <ResourceString bundle="resources/cgj/export/strings.properties" key="bx-l-incl-bleed" replaceFormat="string(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
         </Component>

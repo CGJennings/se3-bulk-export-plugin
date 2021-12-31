@@ -14,7 +14,7 @@ import static resources.Language.string;
 /**
  * Project action that allows the export of game components to images in bulk.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Chris Jennings <https://cgjennings.ca/contact>
  * @since 3.0
  */
 public class BulkExportAction extends TaskAction {

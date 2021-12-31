@@ -10,7 +10,7 @@ import static resources.Language.string;
 /**
  * Plug-in that adds project support for bulk exporting files.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Chris Jennings <https://cgjennings.ca/contact>
  */
 public class BulkExport extends AbstractPlugin {
 

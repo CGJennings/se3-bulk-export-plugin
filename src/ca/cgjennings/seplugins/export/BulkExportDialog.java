@@ -36,13 +36,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
 import static resources.Language.string;
-import resources.ResourceKit;
 import resources.Settings;
 
 /**
  * Dialog for configuring bulk export options.
  *
- * @author Christopher G. Jennings (cjennings@acm.org)
+ * @author Chris Jennings <https://cgjennings.ca/contact>
  */
 public class BulkExportDialog extends javax.swing.JDialog implements AgnosticDialog {
 
@@ -106,7 +105,7 @@ public class BulkExportDialog extends javax.swing.JDialog implements AgnosticDia
         qualityLabel = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         excludeSimpleFacesCheck = new javax.swing.JCheckBox();
-        syntheticBleedMargin = new javax.swing.JCheckBox();
+        bleedMargin = new javax.swing.JCheckBox();
         postProcCheck = new javax.swing.JCheckBox();
         postProcScriptField = new JFileField();
         editScriptBtn = new javax.swing.JButton();
@@ -286,7 +285,7 @@ public class BulkExportDialog extends javax.swing.JDialog implements AgnosticDia
 
         excludeSimpleFacesCheck.setText(string("exf-b-suppress-backs")); // NOI18N
 
-        syntheticBleedMargin.setText(string("de-l-fake-bleed")); // NOI18N
+        bleedMargin.setText(string("bx-l-incl-bleed")); // NOI18N
 
         postProcCheck.setText(string("bx-b-post-proc")); // NOI18N
         postProcCheck.addActionListener(new java.awt.event.ActionListener() {
@@ -311,7 +310,7 @@ public class BulkExportDialog extends javax.swing.JDialog implements AgnosticDia
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(excludeSimpleFacesCheck)
-                    .addComponent(syntheticBleedMargin)
+                    .addComponent(bleedMargin)
                     .addComponent(postProcCheck))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
@@ -327,7 +326,7 @@ public class BulkExportDialog extends javax.swing.JDialog implements AgnosticDia
                 .addContainerGap()
                 .addComponent(excludeSimpleFacesCheck)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(syntheticBleedMargin)
+                .addComponent(bleedMargin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(postProcCheck)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -489,7 +488,7 @@ public class BulkExportDialog extends javax.swing.JDialog implements AgnosticDia
             maxSizeSlider.setValue(maxDimen);
         }
         excludeSimpleFacesCheck.setSelected(s.getYesNo("bulk-exclude-simple", true));
-        syntheticBleedMargin.setSelected(s.getYesNo("bulk-synthetic-bleed", false));
+        bleedMargin.setSelected(s.getYesNo("bulk-synthetic-bleed", false));
 
         postProcCheck.setSelected(s.getYesNo("bulk-postprocess", false));
         postProcScriptField.setText(s.get("bulk-postprocess-script", ""));
@@ -502,6 +501,7 @@ public class BulkExportDialog extends javax.swing.JDialog implements AgnosticDia
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox bleedMargin;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JButton editScriptBtn;
     private javax.swing.JCheckBox excludeSimpleFacesCheck;
@@ -526,7 +526,6 @@ public class BulkExportDialog extends javax.swing.JDialog implements AgnosticDia
     private javax.swing.JButton resetButton;
     private javax.swing.JComboBox resolutionCombo;
     private javax.swing.JCheckBox sizeLimitCheck;
-    private javax.swing.JCheckBox syntheticBleedMargin;
     // End of variables declaration//GEN-END:variables
 
     private int getSizeLimit() {
@@ -569,8 +568,8 @@ public class BulkExportDialog extends javax.swing.JDialog implements AgnosticDia
         s.setInt("bulk-max-size", ex.getDimensionLimit());
         ex.setExcludeSimpleFaces(excludeSimpleFacesCheck.isSelected());
         s.setYesNo("bulk-exclude-simple", ex.isExcludeSimpleFaces());
-        ex.setSynthesizeBleedMargin(syntheticBleedMargin.isSelected());
-        s.setYesNo("bulk-synthetic-bleed", ex.isSynthesizeBleedMargin());
+        ex.setBleedMarginEnabled(bleedMargin.isSelected());
+        s.setYesNo("bulk-synthetic-bleed", ex.isBleedMarginEnabled());
         s.setYesNo("bulk-postprocess", postProcCheck.isSelected());
         s.set("bulk-postprocess-script", postProcScriptField.getText());
 
